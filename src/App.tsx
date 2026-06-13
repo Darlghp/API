@@ -15,7 +15,7 @@ export default function App() {
   const [selectedRegion, setSelectedRegion] = useState('');
   const [apiResponse, setApiResponse] = useState<string>('');
 
-  const apiUrl = import.meta.env.VITE_APP_URL || window.location.origin;
+  const apiUrl = import.meta.env.VITE_APP_URL || '';
 
   useEffect(() => {
     fetchFlags();
@@ -28,8 +28,7 @@ export default function App() {
       if (search) params.append('search', search);
       if (selectedRegion) params.append('region', selectedRegion);
 
-      // Using relative paths to hit the Express backend on the same origin
-      const url = `/api/flags?${params.toString()}`;
+      const url = `${apiUrl}/api/flags?${params.toString()}`;
       
       const res = await fetch(url);
       if (!res.ok) {
@@ -49,7 +48,7 @@ export default function App() {
 
   const testApi = async (endpoint: string) => {
     try {
-      const res = await fetch(endpoint);
+      const res = await fetch(`${apiUrl}${endpoint}`);
       if (!res.ok) {
         throw new Error(`HTTP ${res.status}`);
       }

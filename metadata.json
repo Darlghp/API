@@ -1,0 +1,6 @@
+{
+  "name": "Flags API",
+  "description": "A RESTful API serving country flags with a documentation and playground frontend.",
+  "requestFramePermissions": [],
+  "majorCapabilities": ["MAJOR_CAPABILITY_SERVER_SIDE_GEMINI_API"]
+}

@@ -28,14 +28,19 @@ export default function App() {
       if (search) params.append('search', search);
       if (selectedRegion) params.append('region', selectedRegion);
 
+      // Using relative paths to hit the Express backend on the same origin
       const url = `/api/flags?${params.toString()}`;
+      
       const res = await fetch(url);
+      if (!res.ok) {
+        throw new Error(`HTTP ${res.status}`);
+      }
       const json = await res.json();
       
       if (json.success) {
         setFlags(json.data);
       }
-    } catch (error) {
+    } catch (error: any) {
       console.error('Failed to fetch flags:', error);
     } finally {
       setLoading(false);
@@ -45,12 +50,16 @@ export default function App() {
   const testApi = async (endpoint: string) => {
     try {
       const res = await fetch(endpoint);
+      if (!res.ok) {
+        throw new Error(`HTTP ${res.status}`);
+      }
       const json = await res.json();
       setApiResponse(JSON.stringify(json, null, 2));
-    } catch (error) {
-      setApiResponse('Error fetching data');
+    } catch (error: any) {
+      setApiResponse(`Erro ao obter dados: ${error.message}`);
     }
   };
+
 
   useEffect(() => {
     testApi('/api/flags');

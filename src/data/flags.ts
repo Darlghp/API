@@ -587,7 +587,7 @@ export const flagsData: Flag[] = [
     "code": "HN",
     "name": "Honduras",
     "region": "Americas",
-    "flagUrl": "https://upload.wikimedia.org/wikipedia/commons/8/82/Flag_of_Honduras.svg"
+    "flagUrl": "https://flagcdn.com/w320/hn.png"
   },
   {
     "code": "HK",
